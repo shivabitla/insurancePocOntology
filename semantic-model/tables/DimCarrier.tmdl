@@ -1,0 +1,28 @@
+/// Insurance carrier/underwriter dimension.
+table DimCarrier
+	lineageTag: daf6813b-e3cb-44b6-b406-d4760fc85372
+
+	column CarrierKey
+		isNameInferred
+		sourceColumn: [CarrierKey]
+
+	column CarrierID
+		isNameInferred
+		sourceColumn: [CarrierID]
+
+	column CarrierName
+		isNameInferred
+		sourceColumn: [CarrierName]
+
+	column AMBestRating
+		isNameInferred
+		sourceColumn: [AMBestRating]
+
+	column HeadquartersState
+		isNameInferred
+		sourceColumn: [HeadquartersState]
+
+	partition DimCarrier = calculated
+		mode: import
+		source = DATATABLE("CarrierKey", INTEGER, "CarrierID", STRING, "CarrierName", STRING, "AMBestRating", STRING, "HeadquartersState", STRING, {{1, "CA-001", "Northstar Mutual", "A", "WA"}, {2, "CA-002", "Pioneer Assurance", "A+", "TX"}, {3, "CA-003", "Harbor Life Group", "A", "IL"}, {4, "CA-004", "Summit Commercial", "A-", "GA"}, {5, "CA-005", "Cedar Health Partners", "A", "CO"}})
+

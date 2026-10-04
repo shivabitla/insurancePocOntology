@@ -1,0 +1,24 @@
+/// Insurance sales agent dimension.
+table DimAgent
+	lineageTag: 87fec9fe-3475-479a-92d1-4a11b9184447
+
+	column AgentKey
+		isNameInferred
+		sourceColumn: [AgentKey]
+
+	column AgentID
+		isNameInferred
+		sourceColumn: [AgentID]
+
+	column AgentName
+		isNameInferred
+		sourceColumn: [AgentName]
+
+	column AgentLocation
+		isNameInferred
+		sourceColumn: [AgentLocation]
+
+	partition DimAgent = calculated
+		mode: import
+		source = DATATABLE("AgentKey", INTEGER, "AgentID", STRING, "AgentName", STRING, "AgentLocation", STRING, {{1, "AG-001", "Avery Chen", "Seattle"}, {2, "AG-002", "Jordan Patel", "Austin"}, {3, "AG-003", "Morgan Diaz", "Chicago"}, {4, "AG-004", "Taylor Reed", "Atlanta"}, {5, "AG-005", "Casey Nguyen", "Denver"}})
+

@@ -1,0 +1,91 @@
+/// Fact grain: one policy issuance or renewal transaction. Premium and commission amounts are transaction-level.
+table FactPolicySales
+	lineageTag: 5434a167-d419-4981-932b-225a380d1309
+
+	/// Sum of annualized written premium for policy transactions.
+	measure 'Total Premium' = SUM(FactPolicySales[AnnualPremium])
+		formatString: $#,##0.00
+		lineageTag: 6035c9f4-5aa5-4495-85da-ab07e7b7b23c
+
+	/// Sum of agent commissions on policy transactions.
+	measure 'Total Commission' = SUM(FactPolicySales[CommissionAmount])
+		formatString: $#,##0.00
+		lineageTag: 83a4fe8d-4e48-4a52-9292-ff6d1aa48a43
+
+	/// Count of policy issuance and renewal transactions.
+	measure 'Policy Transactions' = COUNTROWS(FactPolicySales)
+		formatString: #,##0
+		lineageTag: 242d7dc2-593d-40e6-8e8a-3325172c5fbf
+
+	/// Average annual premium per policy transaction.
+	measure 'Average Premium' = DIVIDE([Total Premium], [Policy Transactions])
+		formatString: $#,##0.00
+		lineageTag: 24db70b6-2abd-4ed5-9da7-b590dc41ec21
+
+	/// Sum of coverage amounts represented by policy transactions.
+	measure 'Total Coverage' = SUM(FactPolicySales[CoverageAmount])
+		formatString: $#,##0.00
+		lineageTag: 32477002-c431-4a11-8cc3-0af647161581
+
+	/// Commission as a percentage of annual premium.
+	measure 'Commission Rate' = DIVIDE([Total Commission], [Total Premium])
+		formatString: 0.00%
+		lineageTag: 68aaf791-66c7-4247-a573-368a8a1add1e
+
+	/// Count of new policy issuance transactions.
+	measure 'New Policies' = CALCULATE([Policy Transactions], FactPolicySales[TransactionType] = "New")
+		formatString: #,##0
+		lineageTag: 54cfe650-35ce-487d-a6d3-4c00708018c7
+
+	column PolicySaleKey
+		isNameInferred
+		sourceColumn: [PolicySaleKey]
+
+	column PolicyNumber
+		isNameInferred
+		sourceColumn: [PolicyNumber]
+
+	column SaleDateKey
+		isNameInferred
+		sourceColumn: [SaleDateKey]
+
+	column AgentKey
+		isNameInferred
+		sourceColumn: [AgentKey]
+
+	column CustomerKey
+		isNameInferred
+		sourceColumn: [CustomerKey]
+
+	column ProductKey
+		isNameInferred
+		sourceColumn: [ProductKey]
+
+	column CarrierKey
+		isNameInferred
+		sourceColumn: [CarrierKey]
+
+	column AnnualPremium
+		isNameInferred
+		sourceColumn: [AnnualPremium]
+
+	column CoverageAmount
+		isNameInferred
+		sourceColumn: [CoverageAmount]
+
+	column CommissionAmount
+		isNameInferred
+		sourceColumn: [CommissionAmount]
+
+	column PolicyStatus
+		isNameInferred
+		sourceColumn: [PolicyStatus]
+
+	column TransactionType
+		isNameInferred
+		sourceColumn: [TransactionType]
+
+	partition FactPolicySales = calculated
+		mode: import
+		source = DATATABLE("PolicySaleKey", INTEGER, "PolicyNumber", STRING, "SaleDateKey", INTEGER, "AgentKey", INTEGER, "CustomerKey", INTEGER, "ProductKey", INTEGER, "CarrierKey", INTEGER, "AnnualPremium", CURRENCY, "CoverageAmount", CURRENCY, "CommissionAmount", CURRENCY, "PolicyStatus", STRING, "TransactionType", STRING, {{1, "POL-10001", 20250115, 1, 1, 1, 1, 1250.00, 250000.00, 187.50, "Active", "New"}, {2, "POL-10002", 20250203, 2, 2, 2, 2, 980.00, 180000.00, 147.00, "Active", "New"}, {3, "POL-10003", 20250310, 3, 3, 3, 3, 2100.00, 500000.00, 315.00, "Active", "New"}, {4, "POL-10004", 20250417, 4, 4, 4, 4, 760.00, 150000.00, 114.00, "Active", "Renewal"}, {5, "POL-10005", 20250522, 5, 5, 5, 5, 3400.00, 1000000.00, 510.00, "Active", "New"}})
+

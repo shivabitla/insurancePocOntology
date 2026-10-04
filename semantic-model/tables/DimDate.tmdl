@@ -1,0 +1,34 @@
+/// Calendar dimension for policy issue and renewal dates, covering 2025.
+table DimDate
+	lineageTag: 6952c039-dc91-45ef-aeb9-87fb1d50fb0f
+	dataCategory: Time
+
+	column Date
+		isUnique
+		isNameInferred
+		sourceColumn: [Date]
+
+	column DateKey
+		isNameInferred
+		sourceColumn: [DateKey]
+
+	column CalendarYear
+		isNameInferred
+		sourceColumn: [CalendarYear]
+
+	column Quarter
+		isNameInferred
+		sourceColumn: [Quarter]
+
+	column MonthNumber
+		isNameInferred
+		sourceColumn: [MonthNumber]
+
+	column MonthName
+		isNameInferred
+		sourceColumn: [MonthName]
+
+	partition DimDate = calculated
+		mode: import
+		source = ADDCOLUMNS(CALENDAR(DATE(2025, 1, 1), DATE(2025, 12, 31)), "DateKey", YEAR([Date]) * 10000 + MONTH([Date]) * 100 + DAY([Date]), "CalendarYear", YEAR([Date]), "Quarter", "Q" & FORMAT([Date], "Q"), "MonthNumber", MONTH([Date]), "MonthName", FORMAT([Date], "MMMM"))
+
