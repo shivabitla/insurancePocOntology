@@ -1,0 +1,6 @@
+CustomerKey,CustomerID,CustomerName,Phone,Address,State,Region
+1,C-1001,Riley Brooks,5550101,100 Cedar St,WA,West
+2,C-1002,Jamie Morgan,5550102,200 Lake Ave,TX,South
+3,C-1003,Drew Foster,5550103,300 Prairie Rd,IL,Midwest
+4,C-1004,Skyler James,5550104,400 Peachtree Ln,GA,South
+5,C-1005,Quinn Parker,5550105,500 Summit Dr,CO,West

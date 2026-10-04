@@ -1,0 +1,38 @@
+{
+  "workspace": {
+    "name": "sbfabiq",
+    "id": "4ce23671-8ee7-4717-a61c-7bf937b2d3df"
+  },
+  "lakehouse": {
+    "name": "InsuranceDataLH",
+    "id": "dbeed749-6b8a-4201-93ef-817c1d5bcd70",
+    "tables": [
+      "dbo.dimagent",
+      "dbo.dimcarrier",
+      "dbo.dimcustomer",
+      "dbo.dimdate",
+      "dbo.dimproduct",
+      "dbo.factpolicysales"
+    ],
+    "seedFiles": [
+      "DimAgent.csv",
+      "DimCarrier.csv",
+      "DimCustomer.csv",
+      "DimDate.csv",
+      "DimProduct.csv",
+      "FactPolicySales.csv"
+    ]
+  },
+  "semanticModel": {
+    "name": "InsuranceSalesStarSchema",
+    "databaseId": "e350fbd4-697a-4825-8dc5-23cce326b233",
+    "export": "semantic-model/",
+    "note": "Separate illustrative model currently has five 2025 fact rows; it is not synchronized to the 2026 Lakehouse data."
+  },
+  "ontology": {
+    "name": "InsurnaceOntlogy",
+    "id": "df3ab284-7783-4196-a652-95276c448a7d",
+    "nativeExport": false,
+    "descriptionFile": "ontology-model.json"
+  }
+}
