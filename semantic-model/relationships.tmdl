@@ -1,0 +1,20 @@
+relationship FactPolicySales_Agent
+	fromColumn: FactPolicySales.AgentKey
+	toColumn: DimAgent.AgentKey
+
+relationship FactPolicySales_Customer
+	fromColumn: FactPolicySales.CustomerKey
+	toColumn: DimCustomer.CustomerKey
+
+relationship FactPolicySales_Product
+	fromColumn: FactPolicySales.ProductKey
+	toColumn: DimProduct.ProductKey
+
+relationship FactPolicySales_Carrier
+	fromColumn: FactPolicySales.CarrierKey
+	toColumn: DimCarrier.CarrierKey
+
+relationship FactPolicySales_Date
+	fromColumn: FactPolicySales.SaleDateKey
+	toColumn: DimDate.DateKey
+
