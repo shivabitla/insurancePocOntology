@@ -19,7 +19,7 @@ erDiagram
         int CustomerKey PK
         string CustomerID
         string CustomerName
-        string Phone
+        int Phone
         string Address
         string State
         string Region
