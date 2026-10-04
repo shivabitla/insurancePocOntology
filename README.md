@@ -36,11 +36,12 @@ The ontology models these same relationships with `PolicySale` as the origin ent
 
 ## Ontology
 
-The ontology follows the Lakeshore tutorial pattern: entity types with Lakehouse property bindings and explicit relationships. `ontology-model.json` is a portable description of the ontology shape, not a Fabric import package. The native ontology remains in the Fabric workspace; this repository does not contain a native Fabric ontology package.
+The ontology follows the Lakeshore tutorial pattern: entity types with Lakehouse property bindings and explicit relationships. `ontology.ttl` is the Fabric-generated Turtle export. `ontology-model.json` is a companion manifest that records the fact-to-dimension key mappings; it is not a Fabric import package.
 
 ## Contents
 
 - `DimAgent.csv`, `DimCarrier.csv`, `DimCustomer.csv`, `DimDate.csv`, `DimProduct.csv`, `FactPolicySales.csv`: synthetic seed data.
 - `semantic-model.md`: semantic model and measure notes.
+- `ontology.ttl`: native RDF/Turtle ontology export from Fabric.
 - `ontology-model.json`: entity types, source bindings, and relationship key mappings.
 - `fabric-artifacts.json`: Fabric workspace/item identifiers and export provenance.

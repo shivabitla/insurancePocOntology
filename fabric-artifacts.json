@@ -32,7 +32,9 @@
   "ontology": {
     "name": "InsurnaceOntlogy",
     "id": "df3ab284-7783-4196-a652-95276c448a7d",
-    "nativeExport": false,
+    "nativeExport": true,
+    "nativeExportFile": "ontology.ttl",
+    "nativeExportFormat": "Turtle (RDF)",
     "descriptionFile": "ontology-model.json"
   }
 }
